@@ -2,7 +2,7 @@
 ==============================================================================
 Author:  Göran Gustafsson <gustafsson.g@gmail.com>
 License: BSD 3-Clause
-Version: 0.1.0
+Version: 0.2.0
 Source:  https://github.com/ggustafsson/nnn-dir.nvim
 
 ==============================================================================
