@@ -12,6 +12,9 @@
 - Seamless `nvim` + `nnn` integration. Use commands `nvim`, `:edit`, `:split`,
   `:vsplit`, etc.
 
+- Keeps `netrw`'s "netrw-gx" feature. Open up file/URL under cursor with `gx`
+  keybinding.
+
 - Supports `nnn`'s "cd on quit" feature. See
 [nnn/wiki/Basic-use-cases#configure-cd-on-quit](https://github.com/jarun/nnn/wiki/Basic-use-cases#configure-cd-on-quit)
 
@@ -19,7 +22,7 @@
 
 1. **Seamless integration** - E.g. use it with default commands.
 2. **User-friendly** - E.g. move between splits with default keybindings.
-3. **Minimal but feature complete** - E.g. implement "cd on quit", etc.
+3. **Minimal but feature complete** - E.g. implement "cd on quit", "gx", etc.
 4. **Clean code/Stable use** - E.g. don't use `nvim` in a way it is not meant
    to be used.
 5. **Low effort** - It should "just work" with low mental overhead.
