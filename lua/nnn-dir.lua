@@ -46,15 +46,31 @@ local function set_autocmds()
   })
 end
 
--- Set window switching keybindings in terminal window.
-local function set_keymaps()
+-- Set local window switching keybindings in terminal window.
+local function set_local_keymaps()
   for _, key in ipairs(mappings) do
     vim.api.nvim_buf_set_keymap(0, "t", key, "<C-\\><C-N>" .. key, {})
   end
 end
 
+-- Set global keybindings. Used for Netrw related bindings.
+local function set_global_keymaps()
+  -- Do not override existing user keybinding.
+  if vim.fn.maparg("gx", "n") == "" then
+    if vim.fn.has("mac") then
+      vim.api.nvim_set_keymap("n", "gx", ':silent !open "<cfile>"<CR>', {
+        noremap = true
+      })
+    elseif vim.fn.has("unix") and vim.fn.executable("xdg-open") then
+      vim.api.nvim_set_keymap("n", "gx", ':silent !xdg-open "<cfile>"<CR>', {
+        noremap = true
+      })
+    end
+  end
+end
+
 -- Set miscellaneous settings in terminal window.
-local function set_options()
+local function set_local_options()
   vim.api.nvim_set_option_value("number", false, { scope = "local" })
   vim.api.nvim_set_option_value("relativenumber", false, { scope = "local" })
   vim.api.nvim_set_option_value("signcolumn", "no", { scope = "local" })
@@ -62,7 +78,7 @@ end
 
 -- Initialize nnn directory hijack setup.
 local function setup_hijack()
-  -- Prevent netrw plugin from loading.
+  -- Prevent Netrw plugin from loading.
   vim.g.loaded_netrw = 1
   vim.g.loaded_netrwPlugin = 1
 
@@ -129,14 +145,15 @@ end
 -- Enable plugin. Intended for use in init.lua / init.vim.
 function M.setup()
   setup_hijack()
+  set_global_keymaps()
 end
 
 -- Execute plugin. Not intended for manual use.
 function M.start(path)
   init_nnn(path)
   set_autocmds()
-  set_keymaps()
-  set_options()
+  set_local_keymaps()
+  set_local_options()
 end
 
 return M
