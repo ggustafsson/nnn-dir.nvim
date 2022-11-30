@@ -104,7 +104,7 @@ end
 -- Handle terminal exit actions. Change directory, open files, etc.
 local function on_exit()
   -- 1. Change current directory if "NNN_TMPFILE" file exists.
-  local file, _ = io.open(dir_file, "r")
+  local file = io.open(dir_file, "r")
   if file then
     local dir = file:read():sub(5, -2) -- Content: cd "x"
     vim.cmd("tcd " .. vim.fn.fnameescape(dir))
